@@ -7,13 +7,13 @@ function resolve(dir, file = '') {
 
 module.exports = {
   mode: 'none',
-  entry: resolve('src/index.ts'),
+  entry: resolve('src/index.tsx'),
   output: {
     filename: 'bundle.js',
     path: resolve('dist')
   },
   resolve: {
-    extensions: ['.js', '.ts']
+    extensions: ['.js', '.ts', '.tsx']
   },
   module: {
     rules: [

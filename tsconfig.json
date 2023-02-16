@@ -15,7 +15,9 @@
     "preserveConstEnums": true,
     "stripInternal": true,
     "strict": true,
+    "allowSyntheticDefaultImports": true,
     "outDir": "dist/build",
+    "jsx": "react",
     "rootDir": "src",
     "lib": [
       "dom",

@@ -21,7 +21,7 @@
           <button id="button">Click Me</button>
           <layout-tag :greeting="greeting">
             <header-tag slot="header"></header-tag>
-            <footer-tag slot="footer"></footer-tag>
+            <footer-tag slot="footer" :greeting="greeting"></footer-tag>
           </layout-tag>
         </div>`,
         data() {
