@@ -4711,6 +4711,12 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+function ComponentA(props) {
+    const { count } = props;
+    return react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_2___default.a.Fragment, null,
+        "ComponentA count from props: ",
+        count);
+}
 function TestFooter() {
     const [count, setCount] = Object(react__WEBPACK_IMPORTED_MODULE_2__["useState"])(0);
     let timer;
@@ -4723,8 +4729,10 @@ function TestFooter() {
         };
     });
     return react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", null,
-        "TestFooter: ",
-        count);
+        react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", null,
+            "TestFooter: ",
+            count),
+        react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(ComponentA, { count: count }));
 }
 const template = _microsoft_fast_element__WEBPACK_IMPORTED_MODULE_1__["html"] `
   <div class="footer-container"></div>

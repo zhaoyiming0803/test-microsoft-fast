@@ -3,6 +3,15 @@ import { FASTElement, customElement, html, css, attr } from '@microsoft/fast-ele
 import React, { useEffect, useState } from 'react'
 import { createRoot, Root } from 'react-dom/client'
 
+interface ComponentAProps {
+  count: number
+}
+
+function ComponentA (props: ComponentAProps) {
+  const { count } = props
+  return <>ComponentA count from props: {count}</>
+}
+
 function TestFooter () {
   const [count, setCount] = useState<number>(0)
 
@@ -15,7 +24,10 @@ function TestFooter () {
       clearInterval(timer)
     }
   })
-  return <div>TestFooter: {count}</div>
+  return <div>
+    <div>TestFooter: {count}</div>
+    <ComponentA count={count}></ComponentA>
+  </div>
 }
 
 const template = html<Footer>`
