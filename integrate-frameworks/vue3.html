@@ -18,16 +18,26 @@
       createApp({
         template: `<div>
           <div>{{ message }}</div>
+
           <button id="button">Click Me</button>
+
           <layout-tag :greeting="greeting">
             <header-tag slot="header"></header-tag>
             <footer-tag slot="footer" :greeting="greeting"></footer-tag>
+          </layout-tag>
+
+          <line-tag></line-tag>
+
+          <layout-tag>
+            <!--必须要有 slot，否则无法展示到 layout 中 -->
+            <div slot="header">h</div>
+            <div slot="footer">f</div>
           </layout-tag>
         </div>`,
         data() {
           return {
             greeting: 'greeting11',
-            message: 'Hello Vue!!!'
+            message: 'Hello Vue 3 !!!'
           }
         },
         mounted () {

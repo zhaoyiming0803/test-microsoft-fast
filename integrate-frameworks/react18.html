@@ -5,9 +5,9 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
-  <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
-  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
-  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+  <script crossorigin src="https://unpkg.com/react@18.2.0/umd/react.production.min.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18.2.0/umd/react-dom.production.min.js"></script>
+  <script crossorigin src="https://unpkg.com/babel-standalone@6.26.0/babel.min.js"></script>
   <script src="../dist/bundle.js"></script>
 </head>
 <body>
@@ -15,19 +15,50 @@
 
   <script type="text/babel">
     ;(function (React, ReactDOM, document) {
-      const { createElement } = React
+      const { createElement, useLayoutEffect, useState, useCallback } = React
       const { createRoot } = ReactDOM
       const root = createRoot(document.querySelector('#app'))
 
-      const app = <div>
-        <div>Hello React!!!</div>
-        <layout-tag greeting="greeting">
-          <header-tag slot="header"></header-tag>
-          <footer-tag slot="footer"></footer-tag>
-        </layout-tag>
-      </div>
+      function App () {
+        const [greeting, setGreeting] = useState('greeting')
+
+        useLayoutEffect(() => {
+          const button = document.querySelector('#button')
+          button.addEventListener('click', e => {
+            setGreeting(Math.random())
+          })
+
+          const footerTag = document.querySelector('#footer-tag')
+          footerTag.addEventListener('on-change-greeting', (e) => {
+            console.log('on change greeting: ', e)
+          })
+        }, [])
+
+        const onChangeFooter = (value) => {
+          console.log('onChangeFooter: ', value)
+        }
+
+        return <div>
+          <div>Hello React18 !!!</div>
+
+          <button id="button">Click Me</button>
+          
+          <layout-tag greeting={greeting}>
+            <header-tag slot="header"></header-tag>
+            <footer-tag slot="footer" greeting={greeting} id="footer-tag" onChangeFooter={onChangeFooter}></footer-tag>
+          </layout-tag>
+
+          <line-tag></line-tag>
+
+          <layout-tag>
+            // 必须要有 slot，否则无法展示到 layout 中
+            <div slot="header">h</div>
+            <div slot="footer">f</div>
+          </layout-tag>
+        </div>
+      }
   
-      root.render(app)
+      root.render(<App></App>)
     })(React, ReactDOM, document);
   </script>
 </body>

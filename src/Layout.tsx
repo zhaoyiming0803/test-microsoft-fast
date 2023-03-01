@@ -1,4 +1,4 @@
-import { FASTElement, customElement, attr, html, css, Observable } from '@microsoft/fast-element'
+import { FASTElement, customElement, attr, html, css } from '@microsoft/fast-element'
 
 const template = html<Layout>`
   <div class="header" id="header">
