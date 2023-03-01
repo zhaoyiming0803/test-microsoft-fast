@@ -9,7 +9,6 @@ interface ComponentAProps {
 
 interface TestFooterProps {
   greeting: string
-  onChangeFooter: Function
 }
 
 function ComponentA (props: ComponentAProps) {
@@ -18,14 +17,13 @@ function ComponentA (props: ComponentAProps) {
 }
 
 function TestFooter (props: TestFooterProps) {
-  const { greeting, onChangeFooter } = props
+  const { greeting } = props
   const [count, setCount] = useState<number>(0)
 
   let timer: NodeJS.Timeout
   useEffect(() => {
     timer = setInterval(() => {
       setCount(count + 1)
-      onChangeFooter(count + 1)
     }, 1000)
     return () => {
       clearInterval(timer)
@@ -55,9 +53,6 @@ const styles = css`
 })
 export class Footer extends FASTElement {
   @attr greeting: string = 'Hello Footer'
-  @attr onChangeFooter: Function = (value: string) => {
-    console.log('-----: ', value)
-  }
 
   private root: Root | null = null
 
@@ -70,19 +65,13 @@ export class Footer extends FASTElement {
   }
 
   greetingChanged () {
+    console.log('this.greeting: ', this.greeting)
     this.render()
     this.dispatchEvent(new CustomEvent('on-change-greeting', {
       detail: {
-        a: 1,
-        b: 2
+        greeting: this.greeting
       }
     }))
-  }
-
-  attributeChangedCallback (name: string, oldValue: string, newValue: string) {
-    console.log('name: ', name)
-    console.log('oldValue: ', oldValue)
-    console.log('newValue: ', newValue)
   }
 
   connectedCallback() {
@@ -95,6 +84,6 @@ export class Footer extends FASTElement {
   }
 
   render () {
-    this.root?.render(<TestFooter greeting={this.greeting} onChangeFooter={this.onChangeFooter}></TestFooter>)
+    this.root?.render(<TestFooter greeting={this.greeting}></TestFooter>)
   }
 }

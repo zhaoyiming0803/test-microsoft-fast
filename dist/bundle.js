@@ -4670,13 +4670,12 @@ function ComponentA(props) {
         count);
 }
 function TestFooter(props) {
-    const { greeting, onChangeFooter } = props;
+    const { greeting } = props;
     const [count, setCount] = Object(react__WEBPACK_IMPORTED_MODULE_2__["useState"])(0);
     let timer;
     Object(react__WEBPACK_IMPORTED_MODULE_2__["useEffect"])(() => {
         timer = setInterval(() => {
             setCount(count + 1);
-            onChangeFooter(count + 1);
         }, 1000);
         return () => {
             clearInterval(timer);
@@ -4703,27 +4702,19 @@ let Footer = class Footer extends _microsoft_fast_element__WEBPACK_IMPORTED_MODU
     constructor() {
         super();
         this.greeting = 'Hello Footer';
-        this.onChangeFooter = (value) => {
-            console.log('-----: ', value);
-        };
         this.root = null;
     }
     handleClick(value) {
         console.log('handleClick: ', value);
     }
     greetingChanged() {
+        console.log('this.greeting: ', this.greeting);
         this.render();
         this.dispatchEvent(new CustomEvent('on-change-greeting', {
             detail: {
-                a: 1,
-                b: 2
+                greeting: this.greeting
             }
         }));
-    }
-    attributeChangedCallback(name, oldValue, newValue) {
-        console.log('name: ', name);
-        console.log('oldValue: ', oldValue);
-        console.log('newValue: ', newValue);
     }
     connectedCallback() {
         var _a;
@@ -4736,17 +4727,13 @@ let Footer = class Footer extends _microsoft_fast_element__WEBPACK_IMPORTED_MODU
     }
     render() {
         var _a;
-        (_a = this.root) === null || _a === void 0 ? void 0 : _a.render(react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(TestFooter, { greeting: this.greeting, onChangeFooter: this.onChangeFooter }));
+        (_a = this.root) === null || _a === void 0 ? void 0 : _a.render(react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(TestFooter, { greeting: this.greeting }));
     }
 };
 Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
     _microsoft_fast_element__WEBPACK_IMPORTED_MODULE_1__["attr"],
     Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"])("design:type", String)
 ], Footer.prototype, "greeting", void 0);
-Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
-    _microsoft_fast_element__WEBPACK_IMPORTED_MODULE_1__["attr"],
-    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"])("design:type", Function)
-], Footer.prototype, "onChangeFooter", void 0);
 Footer = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
     Object(_microsoft_fast_element__WEBPACK_IMPORTED_MODULE_1__["customElement"])({
         name: 'footer-tag',

@@ -30,13 +30,9 @@
 
           const footerTag = document.querySelector('#footer-tag')
           footerTag.addEventListener('on-change-greeting', (e) => {
-            console.log('on change greeting: ', e)
+            console.log('on change greeting: ', e.detail)
           })
         }, [])
-
-        const onChangeFooter = (value) => {
-          console.log('onChangeFooter: ', value)
-        }
 
         return <div>
           <div>Hello React18 !!!</div>
@@ -45,7 +41,7 @@
           
           <layout-tag greeting={greeting}>
             <header-tag slot="header"></header-tag>
-            <footer-tag slot="footer" greeting={greeting} id="footer-tag" onChangeFooter={onChangeFooter}></footer-tag>
+            <footer-tag slot="footer" greeting={greeting} id="footer-tag"></footer-tag>
           </layout-tag>
 
           <line-tag></line-tag>
