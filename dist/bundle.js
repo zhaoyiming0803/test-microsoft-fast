@@ -4670,12 +4670,13 @@ function ComponentA(props) {
         count);
 }
 function TestFooter(props) {
-    const { greeting } = props;
+    const { greeting, onChangeFooterCount } = props;
     const [count, setCount] = Object(react__WEBPACK_IMPORTED_MODULE_2__["useState"])(0);
     let timer;
     Object(react__WEBPACK_IMPORTED_MODULE_2__["useEffect"])(() => {
         timer = setInterval(() => {
             setCount(count + 1);
+            onChangeFooterCount(count + 1);
         }, 1000);
         return () => {
             clearInterval(timer);
@@ -4703,6 +4704,14 @@ let Footer = class Footer extends _microsoft_fast_element__WEBPACK_IMPORTED_MODU
         super();
         this.greeting = 'Hello Footer';
         this.root = null;
+        this.onChangeFooterCount = (count) => { };
+        this.onChangeFooterCount = (count) => {
+            this.dispatchEvent(new CustomEvent('on-change-footer-count', {
+                detail: {
+                    count
+                }
+            }));
+        };
     }
     handleClick(value) {
         console.log('handleClick: ', value);
@@ -4710,7 +4719,7 @@ let Footer = class Footer extends _microsoft_fast_element__WEBPACK_IMPORTED_MODU
     greetingChanged() {
         console.log('this.greeting: ', this.greeting);
         this.render();
-        this.dispatchEvent(new CustomEvent('on-change-greeting', {
+        this.dispatchEvent(new CustomEvent('on-change-footer-greeting', {
             detail: {
                 greeting: this.greeting
             }
@@ -4728,7 +4737,7 @@ let Footer = class Footer extends _microsoft_fast_element__WEBPACK_IMPORTED_MODU
     }
     render() {
         var _a;
-        (_a = this.root) === null || _a === void 0 ? void 0 : _a.render(react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(TestFooter, { greeting: this.greeting }));
+        (_a = this.root) === null || _a === void 0 ? void 0 : _a.render(react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(TestFooter, { greeting: this.greeting, onChangeFooterCount: this.onChangeFooterCount }));
     }
 };
 Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([

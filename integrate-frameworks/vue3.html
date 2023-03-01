@@ -47,8 +47,11 @@
           })
 
           const footerTag = document.querySelector('#footer-tag')
-          footerTag.addEventListener('on-change-greeting', e => {
+          footerTag.addEventListener('on-change-footer-greeting', e => {
             console.log('on change greeting in Vue 3: ', e.detail)
+          })
+          footerTag.addEventListener('on-change-footer-count', e => {
+            console.log('on change footer count in Vue 3: ', e.detail)
           })
         },
       }).mount('#app')

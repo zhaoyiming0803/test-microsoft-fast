@@ -29,8 +29,11 @@
           })
 
           const footerTag = document.querySelector('#footer-tag')
-          footerTag.addEventListener('on-change-greeting', (e) => {
+          footerTag.addEventListener('on-change-footer-greeting', (e) => {
             console.log('on change greeting in React 18: ', e.detail)
+          })
+          footerTag.addEventListener('on-change-footer-count', e => {
+            console.log('on change footer count in React 18: ', e.detail)
           })
         }, [])
 
