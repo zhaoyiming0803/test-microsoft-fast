@@ -4723,6 +4723,7 @@ let Footer = class Footer extends _microsoft_fast_element__WEBPACK_IMPORTED_MODU
         super.connectedCallback();
         this.root = Object(react_dom_client__WEBPACK_IMPORTED_MODULE_3__["createRoot"])((_a = this.shadowRoot) === null || _a === void 0 ? void 0 : _a.querySelector('.footer-container'));
         this.render();
+        // dispatchEvent after fister render
         console.log('footer-tag is now connected to the DOM');
     }
     render() {

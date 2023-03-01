@@ -80,6 +80,7 @@ export class Footer extends FASTElement {
     super.connectedCallback()
     this.root = createRoot(this.shadowRoot?.querySelector('.footer-container') as Element)
     this.render()
+    // dispatchEvent after fister render
     console.log('footer-tag is now connected to the DOM')
   }
 

@@ -23,7 +23,7 @@
 
           <layout-tag :greeting="greeting">
             <header-tag slot="header"></header-tag>
-            <footer-tag slot="footer" :greeting="greeting"></footer-tag>
+            <footer-tag slot="footer" :greeting="greeting" id="footer-tag"></footer-tag>
           </layout-tag>
 
           <line-tag></line-tag>
@@ -44,6 +44,11 @@
           const button = document.querySelector('#button')
           button.addEventListener('click', e => {
             this.greeting = Math.random()
+          })
+
+          const footerTag = document.querySelector('#footer-tag')
+          footerTag.addEventListener('on-change-greeting', e => {
+            console.log('on change greeting in Vue 3: ', e.detail)
           })
         },
       }).mount('#app')
