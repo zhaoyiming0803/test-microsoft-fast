@@ -1,12 +1,2 @@
-import { FASTElement } from '@microsoft/fast-element';
-export declare class Footer extends FASTElement {
-    greeting: string;
-    private root;
-    private onChangeFooterCount;
-    constructor();
-    handleClick(value: string): void;
-    greetingChanged(): void;
-    connectedCallback(): void;
-    render(): void;
-}
+export declare const FooterTag: void;
 //# sourceMappingURL=Footer.d.ts.map

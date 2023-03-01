@@ -97,7 +97,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Header", function() { return _Header__WEBPACK_IMPORTED_MODULE_1__["Header"]; });
 
 /* harmony import */ var _Footer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(30);
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Footer", function() { return _Footer__WEBPACK_IMPORTED_MODULE_2__["Footer"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "FooterTag", function() { return _Footer__WEBPACK_IMPORTED_MODULE_2__["FooterTag"]; });
 
 /* harmony import */ var _Line__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(42);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Line", function() { return _Line__WEBPACK_IMPORTED_MODULE_3__["Line"]; });
@@ -4652,28 +4652,24 @@ Header = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Footer", function() { return Footer; });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(2);
-/* harmony import */ var _microsoft_fast_element__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(3);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(31);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var react_dom_client__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(34);
-/* harmony import */ var react_dom_client__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react_dom_client__WEBPACK_IMPORTED_MODULE_3__);
-
-
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FooterTag", function() { return FooterTag; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(31);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_dom_client__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(34);
+/* harmony import */ var react_dom_client__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom_client__WEBPACK_IMPORTED_MODULE_1__);
 
 
 function ComponentA(props) {
     const { count } = props;
-    return react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_2___default.a.Fragment, null,
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null,
         "ComponentA count from props: ",
         count);
 }
 function TestFooter(props) {
     const { greeting, onChangeFooterCount } = props;
-    const [count, setCount] = Object(react__WEBPACK_IMPORTED_MODULE_2__["useState"])(0);
+    const [count, setCount] = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(0);
     let timer;
-    Object(react__WEBPACK_IMPORTED_MODULE_2__["useEffect"])(() => {
+    Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {
         timer = setInterval(() => {
             setCount(count + 1);
             onChangeFooterCount(count + 1);
@@ -4682,29 +4678,26 @@ function TestFooter(props) {
             clearInterval(timer);
         };
     });
-    return react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", null,
-        react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", null,
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null,
+        react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null,
             "TestFooter: ",
             count),
-        react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", null,
+        react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null,
             "greeting: ",
             greeting),
-        react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(ComponentA, { count: count }));
+        react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(ComponentA, { count: count }));
 }
-const template = _microsoft_fast_element__WEBPACK_IMPORTED_MODULE_1__["html"] `
-  <div class="footer-container" @click=${x => x.handleClick('123')}></div>
-`;
-const styles = _microsoft_fast_element__WEBPACK_IMPORTED_MODULE_1__["css"] `
-  .footer-container {
-    color: blue;
-  }
-`;
-let Footer = class Footer extends _microsoft_fast_element__WEBPACK_IMPORTED_MODULE_1__["FASTElement"] {
+const FooterTag = customElements.define('footer-tag', class extends HTMLElement {
     constructor() {
         super();
-        this.greeting = 'Hello Footer';
         this.root = null;
+        this.greeting = '';
         this.onChangeFooterCount = (count) => { };
+        const dom = document.createElement('div');
+        dom.innerHTML = `
+      <div class="footer-container"></div>
+    `;
+        this.attachShadow({ mode: 'open' }).appendChild(dom.cloneNode(true));
         this.onChangeFooterCount = (count) => {
             this.dispatchEvent(new CustomEvent('on-change-footer-count', {
                 detail: {
@@ -4713,11 +4706,8 @@ let Footer = class Footer extends _microsoft_fast_element__WEBPACK_IMPORTED_MODU
             }));
         };
     }
-    handleClick(value) {
-        console.log('handleClick: ', value);
-    }
-    greetingChanged() {
-        console.log('this.greeting: ', this.greeting);
+    greetingChanged(value) {
+        console.log('this.greeting: ', this.greeting, value);
         this.render();
         this.dispatchEvent(new CustomEvent('on-change-footer-greeting', {
             detail: {
@@ -4725,34 +4715,28 @@ let Footer = class Footer extends _microsoft_fast_element__WEBPACK_IMPORTED_MODU
             }
         }));
     }
+    attributeChangedCallback(name, oldValue, newValue) {
+        console.log('name: ', name);
+        if (name === 'greeting') {
+            this.greetingChanged(newValue);
+        }
+    }
     connectedCallback() {
         var _a;
         // Runs when the element is inserted into the DOM. 
         // On first connect, FASTElement hydrates the HTML template, connects template bindings, and adds the styles.
-        super.connectedCallback();
-        this.root = Object(react_dom_client__WEBPACK_IMPORTED_MODULE_3__["createRoot"])((_a = this.shadowRoot) === null || _a === void 0 ? void 0 : _a.querySelector('.footer-container'));
+        // @ts-ignore
+        // super.connectedCallback()
+        this.root = Object(react_dom_client__WEBPACK_IMPORTED_MODULE_1__["createRoot"])((_a = this.shadowRoot) === null || _a === void 0 ? void 0 : _a.querySelector('.footer-container'));
         this.render();
         // dispatchEvent after fister render
         console.log('footer-tag is now connected to the DOM');
     }
     render() {
         var _a;
-        (_a = this.root) === null || _a === void 0 ? void 0 : _a.render(react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(TestFooter, { greeting: this.greeting, onChangeFooterCount: this.onChangeFooterCount }));
+        (_a = this.root) === null || _a === void 0 ? void 0 : _a.render(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(TestFooter, { greeting: this.greeting, onChangeFooterCount: this.onChangeFooterCount }));
     }
-};
-Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
-    _microsoft_fast_element__WEBPACK_IMPORTED_MODULE_1__["attr"],
-    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"])("design:type", String)
-], Footer.prototype, "greeting", void 0);
-Footer = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
-    Object(_microsoft_fast_element__WEBPACK_IMPORTED_MODULE_1__["customElement"])({
-        name: 'footer-tag',
-        template,
-        styles
-    }),
-    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"])("design:paramtypes", [])
-], Footer);
-
+});
 
 
 /***/ }),

@@ -1,6 +1,5 @@
-import { FASTElement, customElement, html, css, attr } from '@microsoft/fast-element'
-
 import React, { useEffect, useState } from 'react'
+
 import { createRoot, Root } from 'react-dom/client'
 
 interface ComponentAProps {
@@ -38,34 +37,28 @@ function TestFooter (props: TestFooterProps) {
   </div>
 }
 
-const template = html<Footer>`
-  <div class="footer-container" @click=${x => x.handleClick('123')}></div>
-`
-
-const styles = css`
-  .footer-container {
-    color: blue;
-  }
-`
-
 interface OnChangeFooterCount {
   (count: number): void
 }
 
-@customElement({
-  name: 'footer-tag',
-  template,
-  styles
-})
-export class Footer extends FASTElement {
-  @attr greeting: string = 'Hello Footer'
 
+export const FooterTag = customElements.define('footer-tag', class extends HTMLElement {
   private root: Root | null = null
+
+  private greeting: string = ''
 
   private onChangeFooterCount: OnChangeFooterCount = (count: number) => {}
 
   constructor () {
     super()
+
+    const dom = document.createElement('div')
+    dom.innerHTML = `
+      <div class="footer-container"></div>
+    `
+    this.attachShadow({ mode: 'open' }).appendChild(
+      dom.cloneNode(true)
+    )
 
     this.onChangeFooterCount = (count: number) => {
       this.dispatchEvent(new CustomEvent('on-change-footer-count', {
@@ -76,12 +69,8 @@ export class Footer extends FASTElement {
     }
   }
 
-  handleClick (value: string) {
-    console.log('handleClick: ', value)
-  }
-
-  greetingChanged () {
-    console.log('this.greeting: ', this.greeting)
+  greetingChanged (value: string) {
+    console.log('this.greeting: ', this.greeting, value)
     this.render()
     this.dispatchEvent(new CustomEvent('on-change-footer-greeting', {
       detail: {
@@ -90,10 +79,18 @@ export class Footer extends FASTElement {
     }))
   }
 
+  attributeChangedCallback (name: string, oldValue: string, newValue: string) {
+    console.log('name: ', name)
+    if (name === 'greeting') {
+     this.greetingChanged(newValue)
+    }
+  }
+
   connectedCallback() {
     // Runs when the element is inserted into the DOM. 
     // On first connect, FASTElement hydrates the HTML template, connects template bindings, and adds the styles.
-    super.connectedCallback()
+    // @ts-ignore
+    // super.connectedCallback()
     this.root = createRoot(this.shadowRoot?.querySelector('.footer-container') as Element)
     this.render()
     // dispatchEvent after fister render
@@ -103,4 +100,5 @@ export class Footer extends FASTElement {
   render () {
     this.root?.render(<TestFooter greeting={this.greeting} onChangeFooterCount={this.onChangeFooterCount}></TestFooter>)
   }
-}
+})
+
