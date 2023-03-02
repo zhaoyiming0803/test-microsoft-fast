@@ -25,14 +25,17 @@ function TestFooter (props: TestFooterProps) {
   const { greeting, onChangeFooterCount } = props
   const [count, setCount] = useState<number>(0)
 
-  let timer: NodeJS.Timeout
+  let timer: null | NodeJS.Timeout
   useEffect(() => {
     timer = setInterval(() => {
       setCount(count + 1)
       onChangeFooterCount(count + 1)
     }, 1000)
     return () => {
-      clearInterval(timer)
+      if (timer) {
+        clearInterval(timer)
+        timer = null
+      }
     }
   })
   return <div>
