@@ -5,6 +5,8 @@ import * as ReactDOM from 'react-dom/client'
 // @ts-ignore
 import reactToWebComponent from 'react-to-webcomponent'
 
+import PropTypes from "prop-types"
+
 import {
   Button,
   Checkbox,
@@ -121,14 +123,37 @@ function MyFormComponent () {
 }
 
 
-function TestReactToWC () {
-  const [countInLine1, setCountInLine1] = useState(0)
+interface TestReactToWCProps {
+  onChangeWcCount: (count: number) => void
+  status: string
+}
+
+TestReactToWC.propTypes = {
+  status: PropTypes.string.isRequired,
+  onChangeWcCount: PropTypes.func
+}
+
+const TestReactToWCTag = reactToWebComponent(TestReactToWC, React, ReactDOM)
+
+customElements.define('test-react-to-wc-tag', TestReactToWCTag)
+
+const instance = new TestReactToWCTag()
+
+function TestReactToWC (props: TestReactToWCProps) {
+  const [count, setCount] = useState(0)
 
   let timer: null | NodeJS.Timeout
 
   useEffect(() => {
     timer = setInterval(() => {
-      setCountInLine1(countInLine1 + 1)
+      const _count = count + 1
+      setCount(_count)
+      // onChangeWcCount(_count)
+      instance.dispatchEvent(new CustomEvent('on-change-count', {
+        detail: {
+          count: _count
+        }
+      }))
     }, 1000)
 
     return () => {
@@ -140,11 +165,11 @@ function TestReactToWC () {
   })
 
   return <div style={{ width: '100%', color: 'blue', fontWeight: 600 }}>
-    <div>-------countInLine1: {countInLine1}----------</div>
+    <div>-------count: {count}----------</div>
     <MyFormComponent></MyFormComponent>
   </div>
 }
 
-const TestReactToWCTag = reactToWebComponent(TestReactToWC, React, ReactDOM)
 
-customElements.define('test-react-to-wc-tag', TestReactToWCTag)
+
+

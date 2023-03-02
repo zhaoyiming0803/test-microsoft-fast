@@ -126,7 +126,8 @@ const styles = css``
 @customElement({
   name: 'my-form-tag',
   template,
-  styles
+  styles,
+  shadowOptions: null
 })
 export class MyForm extends FASTElement {
   private root: Root | null = null
@@ -139,7 +140,7 @@ export class MyForm extends FASTElement {
     // Runs when the element is inserted into the DOM. 
     // On first connect, FASTElement hydrates the HTML template, connects template bindings, and adds the styles.
     super.connectedCallback()
-    this.root = createRoot(this.shadowRoot?.querySelector('.my-form-container') as Element)
+    this.root = createRoot(this.$fastController.element.querySelector('.my-form-container') as Element)
     this.render()
     console.log('my-form-tag is now connected to the DOM')
   }

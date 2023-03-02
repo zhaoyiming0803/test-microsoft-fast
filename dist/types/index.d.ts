@@ -1,4 +1,5 @@
 import 'antd/dist/reset.css';
+import '@arco-design/web-react/dist/css/arco.css';
 import './TestReactToWC';
 export * from './Layout';
 export * from './Header';

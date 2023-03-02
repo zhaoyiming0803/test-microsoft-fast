@@ -66,9 +66,7 @@ interface OnChangeFooterCount {
   name: 'footer-tag',
   template,
   styles,
-  shadowOptions: {
-    mode: 'open'
-  }
+  shadowOptions: null
 })
 export class Footer extends FASTElement {
   @attr({ mode: 'fromView' }) 
@@ -126,8 +124,7 @@ export class Footer extends FASTElement {
     // const style = document.createElement('style')
     // style.innerHTML = `@import './antd.css';`
     // this.shadowRoot?.append(style)
-    
-    this.root = createRoot(this.shadowRoot?.querySelector('.footer-container') as Element)
+    this.root = createRoot(this.$fastController.element.querySelector('.footer-container') as Element)
     this.render()
     // dispatchEvent after fister render
     console.log('footer-tag is now connected to the DOM')

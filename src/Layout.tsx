@@ -26,7 +26,8 @@ const styles = css`
 @customElement({
   name: 'layout-tag',
   template,
-  styles
+  styles,
+  shadowOptions: null
 })
 export class Layout extends FASTElement {
   @attr greeting: string = 'Hello'
@@ -39,7 +40,7 @@ export class Layout extends FASTElement {
   greetingChanged() {
     console.log('greetingChanged: ', this.greeting)
 
-    const bodyEl = this.shadowRoot!.querySelector('.body')
+    const bodyEl = this.$fastController.element.querySelector('.body')
     
     if (bodyEl) {
       bodyEl.innerHTML = this.greeting
@@ -51,6 +52,6 @@ export class Layout extends FASTElement {
     // On first connect, FASTElement hydrates the HTML template, connects template bindings, and adds the styles.
     super.connectedCallback()
     console.log('layout-tag is now connected to the DOM')
-    this.shadowRoot!.querySelector('.body')!.innerHTML = this.greeting
+    this.$fastController.element.querySelector('.body')!.innerHTML = this.greeting
   }
 }

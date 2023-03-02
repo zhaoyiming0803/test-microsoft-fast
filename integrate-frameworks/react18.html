@@ -45,7 +45,16 @@
             // console.log('on change footer count in React 18: ', e.detail)
             setCount(e.detail.count)
           })
+
+          const testReactToWcTag = document.querySelector('#test-react-to-wc-tag')
+          testReactToWcTag.addEventListener('on-change-count', e => {
+            console.log('on change count: ', e.detail)
+          })
         }, [])
+
+        const onChangeWcCount = (value) => {
+          console.log('onChangeWcCount: ', value)
+        }
 
         return <div>
           <div>Hello React18 !!!</div>
@@ -75,7 +84,11 @@
 
           <line-tag></line-tag>
 
-          <test-react-to-wc-tag></test-react-to-wc-tag>
+          <my-form-tag></my-form-tag>
+
+          <line-tag></line-tag>
+
+          <test-react-to-wc-tag id="test-react-to-wc-tag" status="123"></test-react-to-wc-tag>
         </div>
       }
   

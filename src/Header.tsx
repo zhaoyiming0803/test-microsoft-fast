@@ -6,8 +6,6 @@ import { createRoot, Root } from 'react-dom/client'
 
 import { Form, Input, Button, Checkbox } from '@arco-design/web-react'
 
-import '@arco-design/web-react/dist/css/arco.css'
-
 function HeaderComponent () {
   return <>
     <Form style={{ width: 600 }} autoComplete='off'>
@@ -40,7 +38,8 @@ const styles = css`
 @customElement({
   name: 'header-tag',
   template,
-  styles
+  styles,
+  shadowOptions: null
 })
 export class Header extends FASTElement {
   private root: Root | null = null
@@ -54,7 +53,7 @@ export class Header extends FASTElement {
     // On first connect, FASTElement hydrates the HTML template, connects template bindings, and adds the styles.
     super.connectedCallback()
 
-    this.root = createRoot(this.shadowRoot?.querySelector('.header-container') as Element)
+    this.root = createRoot(this.$fastController.element.querySelector('.header-container') as Element)
     this.render()
 
     console.log('header-tag is now connected to the DOM')
