@@ -1,4 +1,4 @@
-import 'antd/dist/antd.css';
+import 'antd/dist/reset.css';
 export * from './Layout';
 export * from './Header';
 export * from './Footer';

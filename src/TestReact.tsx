@@ -2,7 +2,11 @@ import React from 'react'
 
 import { createRoot } from 'react-dom/client'
 
+import { Button as ArcoDesignButton } from '@arco-design/web-react'
+
 import 'antd/dist/reset.css'
+
+import '@arco-design/web-react/dist/css/arco.css'
 
 import {
   Button,
@@ -114,6 +118,7 @@ function MyFormComponent () {
         <Button type="primary" htmlType="submit">
           Submit
         </Button>
+        <ArcoDesignButton type="primary">ArcoDesignButton</ArcoDesignButton>
       </Form.Item>
     </Form>
   )
