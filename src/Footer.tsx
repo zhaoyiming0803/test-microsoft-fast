@@ -1,7 +1,11 @@
 import { FASTElement, customElement, html, css, attr } from '@microsoft/fast-element'
 
 import React, { useEffect, useState } from 'react'
+
 import { createRoot, Root } from 'react-dom/client'
+
+// 因 shadow-dom 样式隔离机制，外部样式一律不生效
+// import './styles.less'
 
 interface ComponentAProps {
   count: number
@@ -32,7 +36,7 @@ function TestFooter (props: TestFooterProps) {
     }
   })
   return <div>
-    <div>TestFooter: {count}</div>
+    <div className="count-in-footer">TestFooter: {count}</div>
     <div>greeting: {greeting}</div>
     <ComponentA count={count}></ComponentA>
   </div>
@@ -46,6 +50,9 @@ const styles = css`
   .footer-container {
     color: blue;
   }
+  .count-in-footer {
+    color: red;
+  }
 `
 
 interface OnChangeFooterCount {
@@ -58,7 +65,32 @@ interface OnChangeFooterCount {
   styles
 })
 export class Footer extends FASTElement {
-  @attr greeting: string = 'Hello Footer'
+  @attr({ mode: 'fromView' }) 
+  public greeting: string = 'Hello Footer'
+  protected greetingChanged (prev: string, next: string) {
+    console.log('prev greeting: ', prev)
+    console.log('next greeting: ', next)
+    // next === this.greeting
+    console.log('this.greeting: ', this.greeting)
+    
+    this.render()
+
+    if (!this.$fastController.isConnected) {
+      return
+    }
+
+    // trigger a event
+
+    this.dispatchEvent(new CustomEvent('on-change-footer-greeting', {
+      detail: {
+        greeting: this.greeting
+      }
+    }))
+
+    // ...... or ..........
+
+    this.$emit('on-change-footer-greeting', this)
+  }
 
   private root: Root | null = null
 
@@ -78,16 +110,6 @@ export class Footer extends FASTElement {
 
   handleClick (value: string) {
     console.log('handleClick: ', value)
-  }
-
-  greetingChanged () {
-    console.log('this.greeting: ', this.greeting)
-    this.render()
-    this.dispatchEvent(new CustomEvent('on-change-footer-greeting', {
-      detail: {
-        greeting: this.greeting
-      }
-    }))
   }
 
   connectedCallback() {

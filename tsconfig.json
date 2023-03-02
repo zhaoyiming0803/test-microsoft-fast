@@ -16,7 +16,7 @@
     "stripInternal": true,
     "strict": true,
     "allowSyntheticDefaultImports": true,
-    "outDir": "dist/build",
+    "outDir": "dist/types",
     "jsx": "react",
     "rootDir": "src",
     "lib": [
@@ -26,5 +26,8 @@
   },
   "include": [
     "src"
+  ],
+  "exclude": [
+    "node_modules/**"
   ]
 }

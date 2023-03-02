@@ -1,11 +1,11 @@
 import { FASTElement } from '@microsoft/fast-element';
 export declare class Footer extends FASTElement {
     greeting: string;
+    protected greetingChanged(prev: string, next: string): void;
     private root;
     private onChangeFooterCount;
     constructor();
     handleClick(value: string): void;
-    greetingChanged(): void;
     connectedCallback(): void;
     render(): void;
 }

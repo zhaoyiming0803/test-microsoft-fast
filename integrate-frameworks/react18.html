@@ -21,6 +21,7 @@
 
       function App () {
         const [greeting, setGreeting] = useState('greeting')
+        const [count, setCount] = useState(0)
 
         useLayoutEffect(() => {
           const button = document.querySelector('#button')
@@ -33,7 +34,8 @@
             console.log('on change greeting in React 18: ', e.detail)
           })
           footerTag.addEventListener('on-change-footer-count', e => {
-            console.log('on change footer count in React 18: ', e.detail)
+            // console.log('on change footer count in React 18: ', e.detail)
+            setCount(e.detail.count)
           })
         }, [])
 
@@ -49,11 +51,19 @@
 
           <line-tag></line-tag>
 
+          <div style={{ color: 'orange' }}>count from event: {count}</div>
+
+          <line-tag></line-tag>
+
           <layout-tag>
             // 必须要有 slot，否则无法展示到 layout 中
             <div slot="header">h</div>
             <div slot="footer">f</div>
           </layout-tag>
+
+          <line-tag></line-tag>
+
+          <my-form-tag></my-form-tag>
         </div>
       }
   

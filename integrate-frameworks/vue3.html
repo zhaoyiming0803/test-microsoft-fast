@@ -28,16 +28,25 @@
 
           <line-tag></line-tag>
 
+          <div style="color: orange;">count from event: {{ count }}</div>
+
+          <line-tag></line-tag>
+
           <layout-tag>
             <!--必须要有 slot，否则无法展示到 layout 中 -->
             <div slot="header">h</div>
             <div slot="footer">f</div>
           </layout-tag>
+
+          <line-tag></line-tag>
+
+          <my-form-tag></my-form-tag>
         </div>`,
         data() {
           return {
             greeting: 'greeting11',
-            message: 'Hello Vue 3 !!!'
+            message: 'Hello Vue 3 !!!',
+            count: 0
           }
         },
         mounted () {
@@ -51,7 +60,9 @@
             console.log('on change greeting in Vue 3: ', e.detail)
           })
           footerTag.addEventListener('on-change-footer-count', e => {
-            console.log('on change footer count in Vue 3: ', e.detail)
+            // console.log('on change footer count in Vue 3: ', e.detail)
+            this.count = e.detail.count
+
           })
         },
       }).mount('#app')

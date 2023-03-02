@@ -1,12 +1,13 @@
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+// const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
 function resolve(dir, file = '') {
   return path.resolve(__dirname, './', dir, file)
 }
 
 module.exports = {
-  mode: 'none',
+  mode: 'production',
   entry: resolve('src/index.tsx'),
   output: {
     filename: 'bundle.js',
@@ -25,6 +26,11 @@ module.exports = {
       {
         test: /\.less$/,
         use: ['style-loader', 'css-loader', 'less-loader'],
+      },
+      {
+        test: /\.css$/,
+        // use: [MiniCssExtractPlugin.loader, 'css-loader']
+        use: ['css-loader']
       },
       {
         test: /\.js$/,
@@ -64,7 +70,10 @@ module.exports = {
         minifyJS: true,
         minifyURLs: true,
       },
-    })
+    }),
+    // new MiniCssExtractPlugin({
+    //   filename: 'bundle.min.css'
+    // })
   ],
   devServer: {
     host: 'localhost',
@@ -78,8 +87,5 @@ module.exports = {
     hot: true,
     open: true,
     openPage: '../',
-  },
-  node: {
-    fs: 'empty'
   }
 }
