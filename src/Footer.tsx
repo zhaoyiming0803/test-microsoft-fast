@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react'
 
 import { createRoot, Root } from 'react-dom/client'
 
-// 因 shadow-dom 样式隔离机制，外部样式一律不生效
+// 因 shadow-dom 样式隔离机制，外部样式无法生效
 // import './styles.less'
 
 interface ComponentAProps {
@@ -62,7 +62,10 @@ interface OnChangeFooterCount {
 @customElement({
   name: 'footer-tag',
   template,
-  styles
+  styles,
+  shadowOptions: {
+    mode: 'open'
+  }
 })
 export class Footer extends FASTElement {
   @attr({ mode: 'fromView' }) 
@@ -116,6 +119,11 @@ export class Footer extends FASTElement {
     // Runs when the element is inserted into the DOM. 
     // On first connect, FASTElement hydrates the HTML template, connects template bindings, and adds the styles.
     super.connectedCallback()
+
+    // const style = document.createElement('style')
+    // style.innerHTML = `@import './antd.css';`
+    // this.shadowRoot?.append(style)
+    
     this.root = createRoot(this.shadowRoot?.querySelector('.footer-container') as Element)
     this.render()
     // dispatchEvent after fister render
