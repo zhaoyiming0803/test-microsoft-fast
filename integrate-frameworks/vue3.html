@@ -7,6 +7,12 @@
   <title>Document</title>
   <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
   <script src="../dist/bundle.js"></script>
+  <style>
+    /* 无法对 shadow dom 生效 */
+    .line-container {
+      color: blue !important;
+    }
+  </style>
 </head>
 <body>
   <div id="app"></div>
