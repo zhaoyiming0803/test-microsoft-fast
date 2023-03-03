@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react'
 import * as ReactDOM from 'react-dom/client'
 
 // @ts-ignore
+// https://github.com/GoogleChrome/proxy-polyfill
 import reactToWebComponent from 'react-to-webcomponent'
 
 import PropTypes from "prop-types"
