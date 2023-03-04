@@ -33,6 +33,7 @@
     "@babel/preset-env": "^7.20.2",
     "@babel/runtime": "^7.21.0",
     "@microsoft/fast-element": "^1.11.0",
+    "@quarkd/quark-react": "^1.0.38",
     "antd": "^5.2.3",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
