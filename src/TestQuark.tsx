@@ -22,9 +22,9 @@ function TestQuarkComponent () {
     <Button type="primary" size="small">Button</Button>
     <Switch checked onChange={onChangeSwitch}></Switch>
     <CheckboxGroup value={groupValue.join()} onChange={onChangeCheckbox}>
-      <Checkbox name="apple"></Checkbox>
+      {/* <Checkbox name="apple"></Checkbox>
       <Checkbox name="warning">橘子</Checkbox>
-      <Checkbox name="banana">香蕉</Checkbox>
+      <Checkbox name="banana">香蕉</Checkbox> */}
     </CheckboxGroup>
   </>
 }

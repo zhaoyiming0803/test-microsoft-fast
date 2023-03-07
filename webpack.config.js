@@ -1,6 +1,6 @@
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-// const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
 function resolve(dir, file = '') {
   return path.resolve(__dirname, './', dir, file)
@@ -29,8 +29,8 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        // use: [MiniCssExtractPlugin.loader, 'css-loader']
-        use: ['css-loader']
+        use: [MiniCssExtractPlugin.loader, 'css-loader']
+        // use: ['css-loader']
       },
       {
         test: /\.js$/,
@@ -71,9 +71,9 @@ module.exports = {
         minifyURLs: true,
       },
     }),
-    // new MiniCssExtractPlugin({
-    //   filename: 'bundle.min.css'
-    // })
+    new MiniCssExtractPlugin({
+      filename: 'bundle.min.css'
+    })
   ],
   devServer: {
     host: 'localhost',
