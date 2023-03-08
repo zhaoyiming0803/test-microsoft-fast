@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useMemo } from 'react'
 
 import * as ReactDOM from 'react-dom/client'
 
@@ -125,21 +125,29 @@ function MyFormComponent () {
 
 
 interface TestReactToWCProps {
-  onChangeWcCount: (count: number) => void
   status: string
 }
 
 TestReactToWC.propTypes = {
-  status: PropTypes.string.isRequired,
-  onChangeWcCount: PropTypes.func
+  status: PropTypes.string.isRequired
 }
 
-const TestReactToWCTag = reactToWebComponent(TestReactToWC, React, ReactDOM)
+const shadowOptions = {}
+
+const TestReactToWCTag = reactToWebComponent(TestReactToWC, React, ReactDOM, shadowOptions)
 
 customElements.define('test-react-to-wc-tag', TestReactToWCTag)
 
 function TestReactToWC (props: TestReactToWCProps) {
+  const { status } = props
   const [count, setCount] = useState(0)
+
+  const className = useMemo(() => {
+    return `status${status}`
+  }, [status])
+
+  // @ts-ignore
+  console.log('abc: ', abc)
 
   let timer: null | NodeJS.Timeout
 
@@ -162,7 +170,7 @@ function TestReactToWC (props: TestReactToWCProps) {
     }
   })
 
-  return <div style={{ width: '100%', color: 'blue', fontWeight: 600 }}>
+  return <div style={{ width: '100%', fontWeight: 600 }} id="i-test-react-to-wc" className={className}>
     <div>-------count: {count}----------</div>
     <MyFormComponent></MyFormComponent>
   </div>

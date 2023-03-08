@@ -7,4 +7,5 @@ export * from './Footer';
 export * from './Line';
 export * from './MyForm';
 export * from './TestQuark';
+export * from './Empty';
 //# sourceMappingURL=index.d.ts.map

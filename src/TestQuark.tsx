@@ -4,7 +4,7 @@ import React, { useState } from 'react'
 
 import { createRoot, Root } from 'react-dom/client'
 
-import { Button, Checkbox, CheckboxGroup, Switch } from '@quarkd/quark-react'
+import { Button, Checkbox, CheckboxGroup, Switch, Field, Radio, Search, Textarea, Rate, Stepper, DatetimePicker } from '@quarkd/quark-react'
 
 function TestQuarkComponent () {
   const [groupValue, setGroupValue] = useState<string[]>(["苹果", "橘子"])
@@ -20,11 +20,20 @@ function TestQuarkComponent () {
 
   return <>
     <Button type="primary" size="small">Button</Button>
-    <Switch checked onChange={onChangeSwitch}></Switch>
+
+    {/* <Switch checked></Switch>
+    <Field></Field>
+    <Search></Search>
+    <Textarea></Textarea>
+    <Rate></Rate>
+    <Stepper></Stepper>
+    <DatetimePicker open={true}></DatetimePicker> */}
+
+    <Radio>Radio</Radio>
     <CheckboxGroup value={groupValue.join()} onChange={onChangeCheckbox}>
-      {/* <Checkbox name="apple"></Checkbox>
+      <Checkbox name="apple"></Checkbox>
       <Checkbox name="warning">橘子</Checkbox>
-      <Checkbox name="banana">香蕉</Checkbox> */}
+      <Checkbox name="banana">香蕉</Checkbox>
     </CheckboxGroup>
   </>
 }

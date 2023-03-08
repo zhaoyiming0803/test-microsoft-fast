@@ -8,7 +8,7 @@ function LineComponent () {
   useLayoutEffect(() => {
     console.log('LineComponent useLayoutEffect')
   }, [])
-  return <div className="line-container">----------------------------------------------------</div>
+  return <div className="line-container">------------------------<slot></slot>----------------------------</div>
 }
 
 const template = html<Line>`

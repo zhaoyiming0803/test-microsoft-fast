@@ -16,20 +16,47 @@
     .line-container {
       color: blue !important;
     }
+
+    .status1 {
+      color: red;
+    }
+
+    .status2 {
+      color: blue;
+    }
   </style>
+
+  <script>
+    var abc = 1234
+  </script>
 </head>
 <body>
   <div id="app"></div>
 
   <script type="text/babel">
     ;(function (React, ReactDOM, document) {
-      const { createElement, useLayoutEffect, useState, useCallback } = React
+      const { createElement, useLayoutEffect, useState, useCallback, useEffect } = React
       const { createRoot } = ReactDOM
       const root = createRoot(document.querySelector('#app'))
 
       function App () {
         const [greeting, setGreeting] = useState('greeting')
         const [count, setCount] = useState(0)
+        const [random, setRandom] = useState(0)
+
+        let timer = null
+
+        useEffect(() => {
+          timer = setInterval(() => {
+            setRandom(Math.random())
+          }, 1000)
+          return () => {
+            if (timer) {
+              clearInterval(timer)
+              timer = null
+            }
+          }
+        }, [])
 
         useLayoutEffect(() => {
           const button = document.querySelector('#button')
@@ -46,7 +73,6 @@
             setCount(e.detail.count)
           })
 
-          const testReactToWcTag = document.querySelector('#test-react-to-wc-tag')
           window.addEventListener('on-change-count', e => {
             console.log('on change count by test-react-to-wc-tag: ', e.detail)
           })
@@ -78,21 +104,29 @@
             <div slot="footer">f</div>
           </layout-tag>
 
-          <line-tag></line-tag>
+          <line-tag>my-form-tag1: {random}</line-tag>
 
           <my-form-tag></my-form-tag>
 
-          <line-tag></line-tag>
+          <line-tag>my-form-tag2: </line-tag>
 
           <my-form-tag></my-form-tag>
 
-          <line-tag></line-tag>
+          <line-tag>test-react-to-wc-tag1: </line-tag>
 
-          <test-react-to-wc-tag id="test-react-to-wc-tag" status="123"></test-react-to-wc-tag>
+          <test-react-to-wc-tag id="test-react-to-wc-tag1" status="1"></test-react-to-wc-tag>
 
-          <line-tag></line-tag>
+          <line-tag>test-react-to-wc-tag2: </line-tag>
+
+          <test-react-to-wc-tag id="test-react-to-wc-tag2" status="2"></test-react-to-wc-tag>
+
+          <line-tag>test-quark-tag: </line-tag>
 
           <test-quark-tag></test-quark-tag>
+
+          <line-tag>empty-tag: </line-tag>
+
+          <empty-tag></empty-tag>
         </div>
       }
   

@@ -1,1 +1,1 @@
-{"version":3,"file":"TestQuark.d.ts","sourceRoot":"","sources":["../../src/TestQuark.tsx"],"names":[],"mappings":"AAAA,OAAO,EAAE,WAAW,EAA4B,MAAM,yBAAyB,CAAA;AAmC/E,qBAKa,SAAU,SAAQ,WAAW;IACxC,OAAO,CAAC,IAAI,CAAoB;;IAMhC,iBAAiB;IASjB,MAAM;CAGP"}
+{"version":3,"file":"TestQuark.d.ts","sourceRoot":"","sources":["../../src/TestQuark.tsx"],"names":[],"mappings":"AAAA,OAAO,EAAE,WAAW,EAA4B,MAAM,yBAAyB,CAAA;AA4C/E,qBAKa,SAAU,SAAQ,WAAW;IACxC,OAAO,CAAC,IAAI,CAAoB;;IAMhC,iBAAiB;IASjB,MAAM;CAGP"}
