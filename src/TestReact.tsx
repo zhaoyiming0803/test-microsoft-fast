@@ -120,10 +120,17 @@ function MyFormComponent () {
         </Button>
         <ArcoDesignButton type="primary">ArcoDesignButton</ArcoDesignButton>
       </Form.Item>
+
+      <div id="my-form-id">My Form DIV</div>
     </Form>
   )
 }
 
 const root = createRoot(document.querySelector('#root') as Element)
 
-root.render(<MyFormComponent></MyFormComponent>)
+root.render(<div>
+  <div>MyFormComponent 1: </div>
+  <MyFormComponent></MyFormComponent>
+  <div>MyFormComponent 2: </div>
+  <MyFormComponent></MyFormComponent>
+</div>)
