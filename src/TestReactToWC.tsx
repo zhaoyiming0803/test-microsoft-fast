@@ -138,8 +138,6 @@ const TestReactToWCTag = reactToWebComponent(TestReactToWC, React, ReactDOM)
 
 customElements.define('test-react-to-wc-tag', TestReactToWCTag)
 
-const instance = new TestReactToWCTag()
-
 function TestReactToWC (props: TestReactToWCProps) {
   const [count, setCount] = useState(0)
 
@@ -149,8 +147,7 @@ function TestReactToWC (props: TestReactToWCProps) {
     timer = setInterval(() => {
       const _count = count + 1
       setCount(_count)
-      // onChangeWcCount(_count)
-      instance.dispatchEvent(new CustomEvent('on-change-count', {
+      window.dispatchEvent(new CustomEvent('on-change-count', {
         detail: {
           count: _count
         }

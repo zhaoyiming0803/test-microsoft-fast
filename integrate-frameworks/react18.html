@@ -47,8 +47,8 @@
           })
 
           const testReactToWcTag = document.querySelector('#test-react-to-wc-tag')
-          testReactToWcTag.addEventListener('on-change-count', e => {
-            console.log('on change count: ', e.detail)
+          window.addEventListener('on-change-count', e => {
+            console.log('on change count by test-react-to-wc-tag: ', e.detail)
           })
         }, [])
 
